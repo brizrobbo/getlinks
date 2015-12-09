@@ -1,0 +1,13 @@
+{
+    "name": "node-get-links",
+    "version": "0.0.1",
+    "description": "Gets hyperlinks from a page and returns them as a JSON array.",
+    "main": "server.js",
+    "author": "Brizrobbo",
+    "dependencies": {
+        "express": "latest",
+        "request": "latest",
+        "cheerio": "latest",
+        "body-parser": "latest"
+    }
+}
