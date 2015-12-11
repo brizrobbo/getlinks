@@ -3,11 +3,25 @@
     "version": "0.0.1",
     "description": "Gets hyperlinks from a page and returns them as a JSON array.",
     "main": "server.js",
-    "author": "Brizrobbo",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brizrobbo/getlinks.git"
+    },
+    "author": "Craig Robinson",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/brizrobbo/getlinks/issues"
+    },
+    "homepage": "https://github.com/brizrobbo/getlinks#readme",
     "dependencies": {
-        "express": "latest",
-        "request": "latest",
+        "body-parser": "latest",
         "cheerio": "latest",
-        "body-parser": "latest"
+        "express": "latest",
+        "nodemon": "latest",
+        "request": "latest",
+        "parseuri": "latest"
     }
 }
