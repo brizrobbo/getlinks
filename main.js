@@ -22,8 +22,9 @@ var bodyParser = require('body-parser')
 // Call in getLinks.js which does most of the work
 var getTheseLinks = require('./getLinks.js');
 
-// Initialise the express app
+// Initialise the express app and set web server port
 var app = express();
+var ws_port = '3000';
 
 // Set some express options - parse application/json
 app.use(bodyParser.json());
@@ -36,8 +37,7 @@ app.get('/', function (req, res) {
 // Handle the POST route
 app.post('/', function (req, res) {
 
-    //console.log("URL: " + req.body["url"]) // populated!
-    var incomingUrl = req.body["url"];
+    var incomingUrl = req.body["url"]; //the url to query is obtained from the JSON POST body
 
     //get the links
     getTheseLinks.getLinks(incomingUrl, function logMyLinks() {
@@ -51,15 +51,13 @@ app.post('/', function (req, res) {
         //turn array into string and return as reponse
         var listOfLinks_JSON = JSON.stringify(uniqListOfLinks);
         res.send(listOfLinks_JSON);
-        //console.log(listOfLinks_JSON);
+
     });
 
 });
 
 // Web server listening on nominated port
-var server = app.listen(3000, function () {
-    var host = server.address().address;
-    var port = server.address().port;
-
-    console.log('Example app listening at http://%s:%s', host, port);
+var server = app.listen(ws_port, function () {
+    var host = 'localhost';
+    console.log('getlinks API listening at http://%s:%s', host, ws_port);
 });

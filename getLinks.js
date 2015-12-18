@@ -24,6 +24,7 @@ var cheerio = require('cheerio');
 
 // Perform work
 exports.getLinks = function (incomingUrl, callback) {
+
     //Empty array to hold links
     listOfLinks = new Array();
 
@@ -40,16 +41,24 @@ exports.getLinks = function (incomingUrl, callback) {
 
         $ = cheerio.load(body);
 
-        //jquery get all hyperlinks
+        //jquery: get all hyperlinks
         links = $('a');
         $(links).each(function (i, link) {
-            //console.log('HREF:' + $(link).attr('href'));
             var thisLink = $(link).attr('href');
             var bookmarkRegex = /^\#/; //begins with #
 
             if (!bookmarkRegex.test(thisLink)) { //only wanting it to select proper links (i.e. no bookmarks)
                 listOfLinks.push(thisLink);
             }
+
+        });
+
+        //jquery: get all images
+        images = $('img');
+        $(images).each(function (i, image) {
+            var thisImage = $(image).attr('src');
+
+            listOfLinks.push(thisImage);
 
         });
 
