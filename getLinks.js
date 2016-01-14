@@ -36,7 +36,7 @@ exports.getLinks = function (incomingUrl, callback) {
 
         //Check for right status code
         if (response.statusCode !== 200) {
-            return console.log('Invalid Status Code Returned:', response.statusCode);
+            return console.log('Invalid Status Code Returned: %d. URL requested: %s', response.statusCode, incomingUrl);
         }
 
         $ = cheerio.load(body);
@@ -46,8 +46,16 @@ exports.getLinks = function (incomingUrl, callback) {
         $(links).each(function (i, link) {
             var thisLink = $(link).attr('href');
             var bookmarkRegex = /^\#/; //begins with #
+            var mailtoRegex = /^mailto/; //begins with mailto
+            var javascriptRegex = /^javascript/; //begins with javascript
 
-            if (!bookmarkRegex.test(thisLink)) { //only wanting it to select proper links (i.e. no bookmarks)
+            if (bookmarkRegex.test(thisLink)) { //only wanting it to select proper links (i.e. no bookmarks)
+                //do nothing
+            } else if (mailtoRegex.test(thisLink)) { //only wanting it to select proper links (i.e. no bookmarks)
+                //do nothing
+            } else if (javascriptRegex.test(thisLink)) { //only wanting it to select proper links (i.e. no bookmarks)
+                //do nothing
+            } else {
                 listOfLinks.push(thisLink);
             }
 
